@@ -117,7 +117,7 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;backgroun
 .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
 .card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:28px 26px 22px;display:flex;flex-direction:column;gap:12px;min-width:0}
 .card details{margin-top:auto}
-@media (min-width:601px){.card:not(.wide) h3{min-height:2.4em}.card:not(.wide) .q{min-height:3.4em}.card:not(.wide) .d{min-height:6.8em}}
+
 .card .ic{margin-bottom:8px;flex:none}
 .card h3{font-family:var(--f-label);font-weight:600;text-transform:uppercase;letter-spacing:.03em;font-size:1.3rem;line-height:1.15}
 .card .q{font-weight:600;font-size:.95rem;color:var(--teal-deep)}
@@ -130,8 +130,8 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;backgroun
 .card details[open] summary .more-l{display:none}
 .card details:not([open]) summary .less-l{display:none}
 .card details ul{margin:12px 0 0;padding-left:18px;font-size:.9rem;display:grid;gap:5px}
-@media (max-width:1000px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:600px){.cards{grid-template-columns:1fr}}
+@media (max-width:1000px){.cards{gap:14px}.card{padding:22px 18px 18px}.card h3{font-size:1.12rem}}
+@media (max-width:720px){.cards{grid-template-columns:1fr}}
 
 /* card da assessoria: ocupa a linha inteira */
 .card.wide{display:grid;grid-column:1/-1;background:var(--teal);border-color:var(--teal);color:#fff;grid-template-columns:minmax(0,1fr) auto;column-gap:32px;align-items:center}
@@ -209,6 +209,27 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;backgroun
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 footer{background:var(--ink);color:#B9CACB;font-size:.86rem;padding-block:22px}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+
+
+/* soluções agrupadas por necessidade */
+.tabs{display:none;gap:8px;margin-bottom:28px;padding:6px;background:var(--paper);border:1px solid var(--line);border-radius:999px;width:fit-content;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{font:600 .95rem var(--f-body);color:var(--teal-deep);background:transparent;border:0;border-radius:999px;padding:10px 18px;cursor:pointer;white-space:nowrap;transition:background .15s ease,color .15s ease}
+.tab:hover{background:var(--teal-wash)}
+.tab[aria-selected="true"]{background:var(--teal);color:#fff}
+.groups{display:grid;gap:clamp(40px,6vh,64px)}
+.group{display:grid;gap:20px}
+.group-title{font-size:clamp(1.4rem,2.4vw,1.85rem);font-weight:700;color:var(--teal-deep)}
+.js-tabs .tabs{display:flex}
+.js-tabs .group-title{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.js-tabs .group:not(.on){display:none}
+@media (max-width:1180px){.js-tabs .tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;border-radius:20px;width:100%;overflow:visible}.tab{padding:11px 16px;font-size:.92rem;text-align:center;white-space:normal;line-height:1.3}}
+@media (max-width:600px){.js-tabs .tabs{grid-template-columns:1fr}}
+.card:not(.wide) details{margin-top:auto}
+@supports (grid-template-rows:subgrid){
+  .card:not(.wide){display:grid;grid-template-rows:subgrid;grid-row:span 5;row-gap:10px;align-content:start}
+  .card:not(.wide) details{margin-top:0;align-self:end}
+}
 
 /* ajuste para qualquer tela */
 @media (min-width:1700px){html{font-size:18px}:root{--wrap:1360px;--hdr:68px}}
@@ -326,13 +347,118 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
       <div class="sec-head">
         <h2 class="sec-title">Nossas soluções</h2>
       </div>
-      <div class="cards">
-        <article class="card wide">
+      <div class="tabs" role="tablist" aria-label="Grupos de soluções">
+        <button type="button" class="tab" role="tab" id="t-estruturar" aria-controls="g-estruturar" aria-selected="true">Estruturação Organizacional</button>
+        <button type="button" class="tab" role="tab" id="t-desenvolver" aria-controls="g-desenvolver" aria-selected="false">Atração e Desenvolvimento</button>
+        <button type="button" class="tab" role="tab" id="t-avaliacao" aria-controls="g-avaliacao" aria-selected="false">Avaliação e Retenção</button>
+        <button type="button" class="tab" role="tab" id="t-acompanhar" aria-controls="g-acompanhar" aria-selected="false">Assessoria e Acompanhamento Estratégico</button>
+      </div>
+      <div class="groups">
+        <div class="group" id="g-estruturar" role="tabpanel" aria-labelledby="t-estruturar">
+          <h3 class="group-title">Estruturação Organizacional</h3>
+          <div class="cards">
+            <article class="card">
+          <div class="ic"><svg aria-hidden="true"><use href="#i-search"/></svg></div>
+          <h3>Diagnóstico empresarial</h3>
+          <p class="q">Não sabe por onde começar?</p>
+          <p class="d">Análise estruturada dos principais processos de gestão da empresa.</p>
+          <details><summary><span class="more-l">Saiba mais</span><span class="less-l">Fechar</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></summary>
+            <ul><li>Formulário aplicado à empresa</li><li>Pontos fortes</li><li>Oportunidades de melhoria</li><li>Prioridades de atuação</li></ul>
+          </details>
+        </article>
+            <article class="card">
+          <div class="ic"><svg aria-hidden="true"><use href="#i-ladder"/></svg></div>
+          <h3>Plano de cargos e salários</h3>
+          <p class="q">Responsabilidades pouco claras?</p>
+          <p class="d">Estruturação dos cargos para mais organização, clareza de responsabilidades e apoio à gestão de pessoas.</p>
+          <details><summary><span class="more-l">Saiba mais</span><span class="less-l">Fechar</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></summary>
+            <ul><li>Levantamento dos cargos existentes</li><li>Descrição de cargos, responsabilidades e requisitos</li><li>Estrutura de níveis, quando aplicável</li><li>Sugestão de faixas salariais baseada no mercado e na realidade da empresa</li><li>Orientações para a tabela salarial</li></ul>
+          </details>
+        </article>
+            <article class="card">
+          <div class="ic"><svg aria-hidden="true"><use href="#i-clip"/></svg></div>
+          <h3>Estruturação do onboarding</h3>
+          <p class="q">Novos colaboradores demoram a se adaptar?</p>
+          <p class="d">Implantação ou melhoria do processo de integração de novos colaboradores.</p>
+          <details><summary><span class="more-l">Saiba mais</span><span class="less-l">Fechar</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></summary>
+            <ul><li>Adaptação mais rápida</li><li>Comunicação clara desde o início da jornada</li><li>Mais engajamento</li></ul>
+          </details>
+        </article>
+          </div>
+        </div>
+        <div class="group" id="g-desenvolver" role="tabpanel" aria-labelledby="t-desenvolver">
+          <h3 class="group-title">Atração e Desenvolvimento</h3>
+          <div class="cards">
+            <article class="card">
+          <div class="ic"><svg aria-hidden="true"><use href="#i-users"/></svg></div>
+          <h3>Recrutamento e seleção</h3>
+          <p class="q">Precisa contratar bem?</p>
+          <p class="d">Atrair e selecionar profissionais alinhados ao perfil da empresa e às necessidades da vaga.</p>
+          <details><summary><span class="more-l">Saiba mais</span><span class="less-l">Fechar</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></summary>
+            <ul><li>Definição dos requisitos</li><li>Divulgação da vaga</li><li>Triagem de currículos</li><li>Testes, quando aplicável</li><li>Entrevistas estruturadas</li><li>Avaliação dos candidatos e apoio na decisão</li></ul>
+          </details>
+        </article>
+            <article class="card">
+          <div class="ic"><svg aria-hidden="true"><use href="#i-cap"/></svg></div>
+          <h3>Treinamentos</h3>
+          <p class="q">Equipe precisa se desenvolver?</p>
+          <p class="d">Treinamentos personalizados conforme as necessidades da empresa.</p>
+          <details><summary><span class="more-l">Saiba mais</span><span class="less-l">Fechar</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></summary>
+            <ul><li>Desenvolvimento do treinamento sob medida</li><li>Condução dos encontros</li><li>Temas do portfólio da Gente da Gente</li></ul>
+          </details>
+        </article>
+            <article class="card">
+          <div class="ic"><svg aria-hidden="true"><use href="#i-compass"/></svg></div>
+          <h3>Avaliação de liderança</h3>
+          <p class="q">Quer conhecer melhor seus líderes?</p>
+          <p class="d">Avaliação individual das competências de liderança para identificar potenciais e oportunidades de desenvolvimento.</p>
+          <details><summary><span class="more-l">Saiba mais</span><span class="less-l">Fechar</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></summary>
+            <ul><li>Aplicação da avaliação</li><li>Consolidação dos resultados</li><li>Devolutiva com relatório de pontos fortes e oportunidades de melhoria</li><li>Recomendações para desenvolvimento</li></ul>
+          </details>
+        </article>
+          </div>
+        </div>
+        <div class="group" id="g-avaliacao" role="tabpanel" aria-labelledby="t-avaliacao">
+          <h3 class="group-title">Avaliação e Retenção</h3>
+          <div class="cards">
+            <article class="card">
+          <div class="ic"><svg aria-hidden="true"><use href="#i-chart"/></svg></div>
+          <h3>Avaliação de desempenho</h3>
+          <p class="q">Sem clareza sobre as entregas da equipe?</p>
+          <p class="d">Implantação e condução do processo de avaliação de desempenho.</p>
+          <details><summary><span class="more-l">Saiba mais</span><span class="less-l">Fechar</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></summary>
+            <ul><li>Definição dos critérios de avaliação</li><li>Construção do formulário</li><li>Aplicação da avaliação</li><li>Consolidação dos resultados e relatório gerencial</li><li>Orientação para feedback</li><li>Plano de Desenvolvimento Individual (PDI)</li></ul>
+          </details>
+        </article>
+            <article class="card">
+          <div class="ic"><svg aria-hidden="true"><use href="#i-target"/></svg></div>
+          <h3>Avaliações de experiência</h3>
+          <p class="q">Dúvida na hora de efetivar?</p>
+          <p class="d">Acompanhamento e avaliação de novos colaboradores no período de experiência, para decisões mais assertivas.</p>
+          <details><summary><span class="more-l">Saiba mais</span><span class="less-l">Fechar</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></summary>
+            <ul><li>Definição dos critérios de avaliação</li><li>Elaboração da avaliação</li><li>Orientação aos gestores</li><li>Aplicação e consolidação dos resultados</li></ul>
+          </details>
+        </article>
+            <article class="card">
+          <div class="ic"><svg aria-hidden="true"><use href="#i-door"/></svg></div>
+          <h3>Entrevistas de desligamento</h3>
+          <p class="q">Por que as pessoas saem?</p>
+          <p class="d">Um processo para acompanhar os desligamentos e identificar oportunidades de melhoria na gestão de pessoas.</p>
+          <details><summary><span class="more-l">Saiba mais</span><span class="less-l">Fechar</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></summary>
+            <ul><li>Roteiro de entrevista</li><li>Orientação para aplicação</li><li>Coleta e análise das informações</li><li>Principais motivos, percepções e indicadores</li></ul>
+          </details>
+        </article>
+          </div>
+        </div>
+        <div class="group" id="g-acompanhar" role="tabpanel" aria-labelledby="t-acompanhar">
+          <h3 class="group-title">Assessoria e Acompanhamento Estratégico</h3>
+          <div class="cards">
+            <article class="card wide">
           <div class="ic"><svg aria-hidden="true"><use href="#i-handshake"/></svg></div>
           <h3>Assessoria em Gestão de Pessoas</h3>
           <p class="q">Quer um RH parceiro da gestão todo mês?</p>
           <p class="d">Planos completos para estruturar, desenvolver e potencializar o capital humano da sua empresa, com reuniões periódicas, treinamentos e serviços de RH incluídos.</p>
-          <p class="badge"><b>4</b>planos para cada momento da empresa</p>
+          <p class="badge">Planos para cada momento da empresa</p>
           <details>
             <summary><span class="more-l">Saiba mais</span><span class="less-l">Fechar</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></summary>
             <div class="plans-wrap">
@@ -359,96 +485,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
                 </tbody>
               </table>
             </div>
-            <div class="terms">
-              <p><b>Organização dos atendimentos:</b> frequência, cronograma e prioridades são alinhados conforme o plano contratado e as necessidades da empresa.</p>
-              <p><b>Limite de participantes:</b> segue o que está indicado na proposta. Acima disso, fazemos uma nova proposta.</p>
-              <p><b>Atendimento fora de Sobral:</b> deslocamento e despesas ficam por conta do contratante, com alinhamento prévio.</p>
-              <p><b>Serviços adicionais:</b> demandas fora do plano são avaliadas e orçadas à parte.</p>
-            </div>
           </details>
         </article>
-
-        <article class="card">
-          <div class="ic"><svg aria-hidden="true"><use href="#i-search"/></svg></div>
-          <h3>Diagnóstico empresarial</h3>
-          <p class="q">Não sabe por onde começar?</p>
-          <p class="d">Análise estruturada dos principais processos de gestão da empresa.</p>
-          <details><summary><span class="more-l">Saiba mais</span><span class="less-l">Fechar</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></summary>
-            <ul><li>Formulário aplicado à empresa</li><li>Pontos fortes</li><li>Oportunidades de melhoria</li><li>Prioridades de atuação</li></ul>
-          </details>
-        </article>
-        <article class="card">
-          <div class="ic"><svg aria-hidden="true"><use href="#i-users"/></svg></div>
-          <h3>Recrutamento e seleção</h3>
-          <p class="q">Precisa contratar bem?</p>
-          <p class="d">Atrair e selecionar profissionais alinhados ao perfil da empresa e às necessidades da vaga.</p>
-          <details><summary><span class="more-l">Saiba mais</span><span class="less-l">Fechar</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></summary>
-            <ul><li>Definição dos requisitos</li><li>Divulgação da vaga</li><li>Triagem de currículos</li><li>Testes, quando aplicável</li><li>Entrevistas estruturadas</li><li>Avaliação dos candidatos e apoio na decisão</li></ul>
-          </details>
-        </article>
-        <article class="card">
-          <div class="ic"><svg aria-hidden="true"><use href="#i-cap"/></svg></div>
-          <h3>Treinamentos</h3>
-          <p class="q">Equipe precisa se desenvolver?</p>
-          <p class="d">Treinamentos personalizados conforme as necessidades da empresa.</p>
-          <details><summary><span class="more-l">Saiba mais</span><span class="less-l">Fechar</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></summary>
-            <ul><li>Desenvolvimento do treinamento sob medida</li><li>Condução dos encontros</li><li>Temas do portfólio da Gente da Gente</li></ul>
-          </details>
-        </article>
-        <article class="card">
-          <div class="ic"><svg aria-hidden="true"><use href="#i-clip"/></svg></div>
-          <h3>Estruturação do onboarding</h3>
-          <p class="q">Novos colaboradores demoram a se adaptar?</p>
-          <p class="d">Implantação ou melhoria do processo de integração de novos colaboradores.</p>
-          <details><summary><span class="more-l">Saiba mais</span><span class="less-l">Fechar</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></summary>
-            <ul><li>Adaptação mais rápida</li><li>Comunicação clara desde o início da jornada</li><li>Mais engajamento</li></ul>
-          </details>
-        </article>
-        <article class="card">
-          <div class="ic"><svg aria-hidden="true"><use href="#i-compass"/></svg></div>
-          <h3>Avaliação de liderança</h3>
-          <p class="q">Quer conhecer melhor seus líderes?</p>
-          <p class="d">Avaliação individual das competências de liderança para identificar potenciais e oportunidades de desenvolvimento.</p>
-          <details><summary><span class="more-l">Saiba mais</span><span class="less-l">Fechar</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></summary>
-            <ul><li>Aplicação da avaliação</li><li>Consolidação dos resultados</li><li>Devolutiva com relatório de pontos fortes e oportunidades de melhoria</li><li>Recomendações para desenvolvimento</li></ul>
-          </details>
-        </article>
-        <article class="card">
-          <div class="ic"><svg aria-hidden="true"><use href="#i-ladder"/></svg></div>
-          <h3>Plano de cargos e salários</h3>
-          <p class="q">Responsabilidades pouco claras?</p>
-          <p class="d">Estruturação dos cargos para mais organização, clareza de responsabilidades e apoio à gestão de pessoas.</p>
-          <details><summary><span class="more-l">Saiba mais</span><span class="less-l">Fechar</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></summary>
-            <ul><li>Levantamento dos cargos existentes</li><li>Descrição de cargos, responsabilidades e requisitos</li><li>Estrutura de níveis, quando aplicável</li><li>Sugestão de faixas salariais baseada no mercado e na realidade da empresa</li><li>Orientações para a tabela salarial</li></ul>
-          </details>
-        </article>
-        <article class="card">
-          <div class="ic"><svg aria-hidden="true"><use href="#i-chart"/></svg></div>
-          <h3>Avaliação de desempenho</h3>
-          <p class="q">Sem clareza sobre as entregas da equipe?</p>
-          <p class="d">Implantação e condução do processo de avaliação de desempenho.</p>
-          <details><summary><span class="more-l">Saiba mais</span><span class="less-l">Fechar</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></summary>
-            <ul><li>Definição dos critérios de avaliação</li><li>Construção do formulário</li><li>Aplicação da avaliação</li><li>Consolidação dos resultados e relatório gerencial</li><li>Orientação para feedback</li><li>Plano de Desenvolvimento Individual (PDI)</li></ul>
-          </details>
-        </article>
-        <article class="card">
-          <div class="ic"><svg aria-hidden="true"><use href="#i-target"/></svg></div>
-          <h3>Avaliações de experiência</h3>
-          <p class="q">Dúvida na hora de efetivar?</p>
-          <p class="d">Acompanhamento e avaliação de novos colaboradores no período de experiência, para decisões mais assertivas.</p>
-          <details><summary><span class="more-l">Saiba mais</span><span class="less-l">Fechar</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></summary>
-            <ul><li>Definição dos critérios de avaliação</li><li>Elaboração da avaliação</li><li>Orientação aos gestores</li><li>Aplicação e consolidação dos resultados</li></ul>
-          </details>
-        </article>
-        <article class="card">
-          <div class="ic"><svg aria-hidden="true"><use href="#i-door"/></svg></div>
-          <h3>Entrevistas de desligamento</h3>
-          <p class="q">Por que as pessoas saem?</p>
-          <p class="d">Um processo para acompanhar os desligamentos e identificar oportunidades de melhoria na gestão de pessoas.</p>
-          <details><summary><span class="more-l">Saiba mais</span><span class="less-l">Fechar</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></summary>
-            <ul><li>Roteiro de entrevista</li><li>Orientação para aplicação</li><li>Coleta e análise das informações</li><li>Principais motivos, percepções e indicadores</li></ul>
-          </details>
-        </article>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -565,6 +605,12 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
 
 <script>
 (function(){
+
+  var sol=document.getElementById('solucoes');
+  if(sol){sol.classList.add('js-tabs');var tabs=sol.querySelectorAll('.tab');
+    function show(t){tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute('aria-controls')).classList.toggle('on',on);});}
+    tabs.forEach(function(t,i){t.addEventListener('click',function(){show(t)});t.addEventListener('keydown',function(e){var k=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(k){var n=tabs[(i+k+tabs.length)%tabs.length];n.focus();show(n);}});});
+    show(tabs[0]);}
   var btn=document.getElementById('menu-btn'), menu=document.getElementById('menu');
   btn.addEventListener('click',function(){var o=menu.classList.toggle('open');btn.setAttribute('aria-expanded',o);btn.setAttribute('aria-label',o?'Fechar menu':'Abrir menu');});
   menu.addEventListener('click',function(e){if(e.target.closest('a')){menu.classList.remove('open');btn.setAttribute('aria-expanded','false');}});
